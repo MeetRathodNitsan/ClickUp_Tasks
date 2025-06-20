@@ -76,7 +76,14 @@ def run_mcp_web_terminal():
         elif cmd == "write_file":
             result = write_file(args["path"], args["content"])
         elif cmd == "ask_llm":
-            result = ask_llm(args["prompt"])
+            print("🧠 You are now chatting with the local LLM (Ollama). Type 'exit' to return.")
+            while True:
+                user_prompt = input("🗨️ You: ")
+                if user_prompt.lower() in ["exit", "quit"]:
+                    break
+                response = ask_llm(user_prompt)
+                print("🤖 LLM:", response)
+
         else:
             result = "❌ Tool not implemented."
 
